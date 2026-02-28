@@ -548,9 +548,14 @@
         top: 0;
         z-index: 30;
         box-shadow: 0 6px 14px rgba(7, 20, 40, 0.2);
-        padding: 0.85rem;
+        padding: 0.72rem 0.78rem;
         flex-wrap: wrap;
         align-items: center;
+      }
+
+      body:not(.force-desktop) .logo {
+        width: 64px;
+        height: 64px;
       }
 
       body:not(.force-desktop) .brand h1 {
@@ -631,9 +636,14 @@
       top: 0;
       z-index: 30;
       box-shadow: 0 6px 14px rgba(7, 20, 40, 0.2);
-      padding: 0.85rem;
+      padding: 0.72rem 0.78rem;
       flex-wrap: wrap;
       align-items: center;
+    }
+
+    body.force-mobile .logo {
+      width: 64px;
+      height: 64px;
     }
 
     body.force-mobile .brand h1 {
