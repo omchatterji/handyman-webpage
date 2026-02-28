@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FixForge Handyman</title>
+  <style>
+    :root {
+      --navy-950: #071428;
+      --navy-900: #0a1f43;
+      --navy-800: #103164;
+      --navy-700: #1a4a8f;
+      --ink: #12213f;
+      --muted: #4e628f;
+      --bg: #f5f8ff;
+      --white: #ffffff;
+      --line: #dbe3f4;
+      --accent: #f05a28;
+      --accent-strong: #de4715;
+      --accent-soft: #fff1eb;
+      --radius: 16px;
+      --shadow-sm: 0 6px 18px rgba(9, 29, 63, 0.09);
+      --shadow-md: 0 16px 36px rgba(9, 29, 63, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Avenir Next", "Segoe UI", Tahoma, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top right, rgba(240, 90, 40, 0.14), transparent 32%), var(--bg);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .site {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
+      color: var(--white);
+      padding: 0.9rem clamp(1rem, 3vw, 2.5rem) 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: linear-gradient(140deg, var(--accent), #ff7b52);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.05rem;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .brand h1 {
+      font-size: 1.05rem;
+      line-height: 1.2;
+      letter-spacing: 0.25px;
+    }
+
+    .brand p {
+      font-size: 0.8rem;
+      color: #c4d4f3;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .menu-toggle:hover,
+    .menu-toggle:focus-visible {
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+    }
+
+    .top-contact {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .top-contact p {
+      font-size: 0.88rem;
+      color: #d6e2fb;
+      text-align: right;
+      line-height: 1.35;
+    }
+
+    .contact-cta {
+      border: none;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 10px;
+      min-height: 42px;
+      padding: 0.58rem 0.95rem;
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(240, 90, 40, 0.35);
+      white-space: nowrap;
+    }
+
+    .contact-cta:hover,
+    .contact-cta:focus-visible {
+      background: var(--accent-strong);
+      outline: none;
+    }
+
+    .contact-cta-mobile {
+      display: none;
+    }
+
+    .view-toggle-wrap {
+      text-align: center;
+      padding: 0.2rem 1rem 1.1rem;
+    }
+
+    .view-toggle-link {
+      color: var(--navy-700);
+      font-size: 0.86rem;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: nowrap;
+      width: auto;
+      max-width: none;
+      margin: 0 0 0 2.25rem;
+      flex: 0 1 auto;
+    }
+
+    .tab-button {
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      border-radius: 10px;
+      min-height: 42px;
+      padding: 0.55rem 0.95rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .tab-button:hover,
+    .tab-button:focus-visible {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.35);
+      outline: none;
+    }
+
+    .tab-button.active {
+      background: var(--accent);
+      border-color: transparent;
+      box-shadow: 0 8px 16px rgba(240, 90, 40, 0.35);
+    }
+
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: clamp(1rem, 2.5vw, 2rem);
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fade 0.25s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(130deg, rgba(7, 20, 40, 0.95), rgba(16, 49, 100, 0.88)),
+        radial-gradient(circle at top right, rgba(240, 90, 40, 0.3), transparent 35%);
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 1rem;
+      padding: clamp(1.2rem, 3.2vw, 2.6rem);
+    }
+
+    .eyebrow {
+      color: #ffe2d8;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.8rem, 4vw, 3.1rem);
+      line-height: 1.08;
+      margin-bottom: 0.85rem;
+      max-width: 16ch;
+    }
+
+    .hero p {
+      color: #dce8ff;
+      font-size: 1.03rem;
+      max-width: 52ch;
+    }
+
+    .hero-ctas {
+      margin-top: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .btn {
+      display: inline-block;
+      border-radius: 10px;
+      padding: 0.62rem 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.92rem;
+      min-height: 42px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: var(--accent-strong);
+      outline: none;
+    }
+
+    .btn-ghost {
+      color: #edf4ff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 1rem;
+      align-self: end;
+    }
+
+    .hero-box h3 {
+      font-size: 1rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .hero-box ul {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      color: #e8f0ff;
+    }
+
+    .hero-box li::before {
+      content: "\2713\00a0";
+      color: #ffb39b;
+      font-weight: 800;
+    }
+
+    .strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .strip-card {
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 12px;
+      padding: 0.95rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .strip-card h3 {
+      color: var(--navy-800);
+      font-size: 0.98rem;
+      margin-bottom: 0.32rem;
+    }
+
+    .strip-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .section-head {
+      margin: 0.25rem 0 0.9rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.45rem, 2.5vw, 2rem);
+      color: var(--navy-900);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .service {
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .service .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .service h3 {
+      color: var(--navy-800);
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+    }
+
+    .service p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .quote {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--accent);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      padding: 1rem;
+    }
+
+    .quote p:first-child {
+      color: #243a68;
+      margin-bottom: 0.5rem;
+    }
+
+    .quote p:last-child {
+      color: #6b3f31;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .contact-band {
+      border-radius: 14px;
+      background: linear-gradient(140deg, var(--navy-900), var(--navy-700));
+      color: var(--white);
+      padding: 1.1rem;
+      margin-bottom: 0.9rem;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 1rem;
+    }
+
+    .contact-band h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.38rem;
+    }
+
+    .contact-band p {
+      color: #d8e5ff;
+      font-size: 0.95rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 0.28rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-list strong {
+      color: #ffccb8;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .faq-item {
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .faq-question {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: var(--navy-900);
+      text-align: left;
+      cursor: pointer;
+      padding: 0.88rem 1rem;
+      font-size: 0.96rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .faq-question::after {
+      content: "+";
+      color: var(--accent-strong);
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .faq-question[aria-expanded="true"]::after {
+      content: "-";
+    }
+
+    .faq-answer {
+      display: none;
+      border-top: 1px solid var(--line);
+      padding: 0.85rem 1rem 0.95rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .faq-answer.open {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      color: #60719a;
+      font-size: 0.84rem;
+      padding: 0.8rem 1rem 1.25rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .testimonials,
+      .strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-band {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body:not(.force-desktop) .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        box-shadow: 0 6px 14px rgba(7, 20, 40, 0.2);
+        padding: 0.85rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      body:not(.force-desktop) .brand h1 {
+        display: block;
+        font-size: 0.95rem;
+        line-height: 1.1;
+      }
+
+      body:not(.force-desktop) .brand p {
+        display: none;
+      }
+
+      body:not(.force-desktop) .brand {
+        gap: 0.5rem;
+        min-width: 0;
+      }
+
+      body:not(.force-desktop) .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+      }
+
+      body:not(.force-desktop) .top-contact {
+        display: none;
+      }
+
+      body:not(.force-desktop) .tabs {
+        display: none;
+        width: 100%;
+        margin: 0.7rem 0 0;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+      }
+
+      body:not(.force-desktop) .topbar.menu-open .tabs {
+        display: flex !important;
+      }
+
+      body:not(.force-desktop) .tab-button {
+        flex: 1 1 calc(50% - 0.45rem);
+        min-width: 0;
+        text-align: center;
+        font-size: 0.88rem;
+      }
+
+      body:not(.force-desktop) .contact-cta-mobile {
+        display: block;
+        position: fixed;
+        left: 0.9rem;
+        right: 0.9rem;
+        bottom: 0.9rem;
+        z-index: 40;
+      }
+
+      body:not(.force-desktop) .page {
+        padding: 0.9rem 0.9rem 4.8rem;
+      }
+
+      body:not(.force-desktop) .hero {
+        border-radius: 14px;
+      }
+
+      body:not(.force-desktop) .hero p {
+        font-size: 0.95rem;
+      }
+
+      body:not(.force-desktop) .strip,
+      body:not(.force-desktop) .services-grid,
+      body:not(.force-desktop) .testimonials {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    body.force-mobile .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 6px 14px rgba(7, 20, 40, 0.2);
+      padding: 0.85rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    body.force-mobile .brand h1 {
+      display: block;
+      font-size: 0.95rem;
+      line-height: 1.1;
+    }
+
+    body.force-mobile .brand p {
+      display: none;
+    }
+
+    body.force-mobile .brand {
+      gap: 0.5rem;
+      min-width: 0;
+    }
+
+    body.force-mobile .menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+    }
+
+    body.force-mobile .top-contact {
+      display: none;
+    }
+
+    body.force-mobile .tabs {
+      display: none;
+      width: 100%;
+      margin: 0.7rem 0 0;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    body.force-mobile .topbar.menu-open .tabs {
+      display: flex !important;
+    }
+
+    body.force-mobile .tab-button {
+      flex: 1 1 calc(50% - 0.45rem);
+      min-width: 0;
+      text-align: center;
+      font-size: 0.88rem;
+    }
+
+    body.force-mobile .contact-cta-mobile {
+      display: block;
+      position: fixed;
+      left: 0.9rem;
+      right: 0.9rem;
+      bottom: 0.9rem;
+      z-index: 40;
+    }
+
+    body.force-mobile .page {
+      padding: 0.9rem 0.9rem 4.8rem;
+    }
+
+    body.force-mobile .hero {
+      border-radius: 14px;
+    }
+
+    body.force-mobile .hero p {
+      font-size: 0.95rem;
+    }
+
+    body.force-mobile .strip,
+    body.force-mobile .services-grid,
+    body.force-mobile .testimonials {
+      grid-template-columns: 1fr;
+    }
+
+    @media (max-width: 390px) {
+      body:not(.force-desktop) .tab-button {
+        flex-basis: 100%;
+      }
+
+      body:not(.force-desktop) .hero h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    body.force-mobile .tab-button {
+      flex-basis: 100%;
+    }
+
+    body.force-mobile .hero h2 {
+      font-size: 1.6rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="site">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">FF</div>
+        <div>
+          <h1>FixForge Handyman</h1>
+          <p>Quality home repair and improvement</p>
+        </div>
+      </div>
+      <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="tabs" aria-label="Main Navigation">
+        <button class="tab-button active" type="button" data-tab="home">Home</button>
+        <button class="tab-button" type="button" data-tab="services">Services</button>
+        <button class="tab-button" type="button" data-tab="testimonials">Testimonials</button>
+        <button class="tab-button" type="button" data-tab="faqs">FAQs</button>
+      </nav>
+      <div class="top-contact">
+        <p>Call: (555) 213-9087</p>
+        <button class="contact-cta" type="button" data-tab-link="contact">Contact Us</button>
+      </div>
+    </header>
+
+    <section class="page">
+      <article class="tab-panel active" id="home">
+        <section class="hero">
+          <div class="hero-inner">
+            <div>
+              <p class="eyebrow">Trusted Local Handyman</p>
+              <h2>Reliable help for repairs, installs, and home projects</h2>
+              <p>
+                One call for the jobs that keep your house in shape. Fast scheduling, clear estimates,
+                and workmanship you can count on.
+              </p>
+              <div class="hero-ctas">
+                <a class="btn btn-primary" href="mailto:hello@fixforgehandyman.com">Get a Free Estimate</a>
+                <a class="btn btn-ghost" href="#contact" data-tab-link="contact">View Contact Info</a>
+              </div>
+            </div>
+            <aside class="hero-box">
+              <h3>Why homeowners choose us</h3>
+              <ul>
+                <li>Same-week appointments available</li>
+                <li>Upfront pricing before any work begins</li>
+                <li>Respectful, clean, and on-time service</li>
+                <li>Satisfaction guaranteed on every job</li>
+              </ul>
+            </aside>
+          </div>
+        </section>
+
+        <section class="strip">
+          <article class="strip-card">
+            <h3>Fast response</h3>
+            <p>Most requests are answered within one business day.</p>
+          </article>
+          <article class="strip-card">
+            <h3>Transparent estimates</h3>
+            <p>Know scope and cost before work starts.</p>
+          </article>
+          <article class="strip-card">
+            <h3>Local and dependable</h3>
+            <p>Proudly serving neighborhoods across the metro area.</p>
+          </article>
+        </section>
+      </article>
+
+      <article class="tab-panel" id="services">
+        <header class="section-head">
+          <h2>Handyman Services</h2>
+          <p>
+            Practical help for maintenance, repairs, and installation jobs. We can customize service plans
+            for homeowners, landlords, and small offices.
+          </p>
+        </header>
+        <section class="services-grid">
+          <article class="service">
+            <div class="icon" aria-hidden="true">W</div>
+            <h3>General Repairs</h3>
+            <p>Drywall patches, door adjustments, trim fixes, and everyday home issues.</p>
+          </article>
+          <article class="service">
+            <div class="icon" aria-hidden="true">L</div>
+            <h3>Light Installation</h3>
+            <p>Fans, fixtures, dimmers, and replacements to refresh interior spaces.</p>
+          </article>
+          <article class="service">
+            <div class="icon" aria-hidden="true">K</div>
+            <h3>Kitchen and Bath</h3>
+            <p>Faucets, cabinet hardware, caulking, and fixture swap-outs.</p>
+          </article>
+          <article class="service">
+            <div class="icon" aria-hidden="true">O</div>
+            <h3>Outdoor Work</h3>
+            <p>Fence touch-ups, gate alignment, weatherproofing, and seasonal upkeep.</p>
+          </article>
+          <article class="service">
+            <div class="icon" aria-hidden="true">A</div>
+            <h3>Assembly and Mounting</h3>
+            <p>Furniture assembly, shelving, TV mounts, and wall hardware installs.</p>
+          </article>
+          <article class="service">
+            <div class="icon" aria-hidden="true">P</div>
+            <h3>Punch-List Projects</h3>
+            <p>Bundle multiple small jobs into one efficient service visit.</p>
+          </article>
+          <article class="service">
+            <div class="icon" aria-hidden="true">R</div>
+            <h3>Rental Turnovers</h3>
+            <p>Quick unit refreshes between tenants with detail-focused repair work.</p>
+          </article>
+          <article class="service">
+            <div class="icon" aria-hidden="true">M</div>
+            <h3>Maintenance Plans</h3>
+            <p>Recurring preventative upkeep for busy homeowners and property managers.</p>
+          </article>
+        </section>
+      </article>
+
+      <article class="tab-panel" id="testimonials">
+        <header class="section-head">
+          <h2>What Clients Say</h2>
+          <p>Recent feedback from homeowners who hired FixForge for repair and maintenance work.</p>
+        </header>
+        <section class="testimonials">
+          <blockquote class="quote">
+            <p>"Great communication from start to finish. They solved three issues in one visit and left everything clean."</p>
+            <p>- Rachel K., Midtown</p>
+          </blockquote>
+          <blockquote class="quote">
+            <p>"Professional, fair pricing, and they showed up right on time. We will absolutely book again."</p>
+            <p>- Marcus T., Riverside</p>
+          </blockquote>
+          <blockquote class="quote">
+            <p>"Exactly the kind of dependable local service we were looking for. Fast and high-quality work."</p>
+            <p>- Dana L., Northside</p>
+          </blockquote>
+        </section>
+      </article>
+
+      <article class="tab-panel" id="contact">
+        <header class="section-head">
+          <h2>Contact FixForge</h2>
+          <p>Call, email, or send a quote request and we will follow up with the next available scheduling options.</p>
+        </header>
+
+        <section class="contact-band">
+          <div>
+            <h3>Request a free estimate</h3>
+            <p>Tell us what you need done and attach a few photos for faster pricing.</p>
+            <div class="hero-ctas">
+              <a class="btn btn-primary" href="mailto:hello@fixforgehandyman.com">Email Us</a>
+              <a class="btn btn-ghost" href="tel:+15552139087">Call Now</a>
+            </div>
+          </div>
+          <ul class="contact-list">
+            <li><strong>Phone:</strong> (555) 213-9087</li>
+            <li><strong>Email:</strong> hello@fixforgehandyman.com</li>
+            <li><strong>Hours:</strong> Mon-Sat, 8:00 AM-6:00 PM</li>
+            <li><strong>Service Area:</strong> Greater Metro Area</li>
+          </ul>
+        </section>
+      </article>
+
+      <article class="tab-panel" id="faqs">
+        <header class="section-head">
+          <h2>Frequently Asked Questions</h2>
+          <p>Quick answers about scheduling, pricing, materials, and what to expect on service day.</p>
+        </header>
+
+        <section class="faq-list">
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="true" aria-controls="faq-a1" id="faq-q1">
+              How soon can you schedule a job?
+            </button>
+            <div class="faq-answer open" id="faq-a1" role="region" aria-labelledby="faq-q1">
+              Most appointments are available within 2 to 4 business days, depending on job size and your location.
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+              Do you provide free estimates?
+            </button>
+            <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
+              Yes. We provide free estimates for most standard handyman work. Larger projects may require an on-site assessment.
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+              Do I need to buy materials in advance?
+            </button>
+            <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
+              Not always. We can either work with materials you provide or source them for you and include them in the estimate.
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+              What types of payments do you accept?
+            </button>
+            <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
+              We accept major credit cards, debit cards, and electronic transfers. Payment is due after approved completion of work.
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+              Is your work guaranteed?
+            </button>
+            <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5">
+              Yes. We stand behind our workmanship and will address any installation-related issues within the stated service warranty period.
+            </div>
+          </article>
+        </section>
+      </article>
+    </section>
+
+    <button class="contact-cta contact-cta-mobile" type="button" data-tab-link="contact">Contact Us</button>
+
+    <footer>
+      Copyright 2026 FixForge Handyman. Placeholder branding and sample content.
+    </footer>
+    <div class="view-toggle-wrap">
+      <a href="#" id="view-toggle" class="view-toggle-link">Switch to Mobile View</a>
+    </div>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.tab-panel');
+    const tabLinks = document.querySelectorAll('[data-tab-link]');
+    const faqButtons = document.querySelectorAll('.faq-question');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const topbar = document.querySelector('.topbar');
+    const tabsNav = document.querySelector('.topbar .tabs');
+    const viewToggle = document.getElementById('view-toggle');
+
+    function bindTap(element, handler) {
+      if (!element) return;
+      let touchHandled = false;
+      element.addEventListener('touchend', (event) => {
+        touchHandled = true;
+        event.preventDefault();
+        handler(event);
+      }, { passive: false });
+      element.addEventListener('click', (event) => {
+        if (touchHandled) {
+          touchHandled = false;
+          return;
+        }
+        handler(event);
+      });
+    }
+
+    function isMobileMode() {
+      return document.body.classList.contains('force-mobile') ||
+        (window.innerWidth <= 640 && !document.body.classList.contains('force-desktop'));
+    }
+
+    function syncMenuA11y() {
+      if (!tabsNav || !topbar || !menuToggle) return;
+      const open = topbar.classList.contains('menu-open');
+      const mobile = isMobileMode();
+      tabsNav.setAttribute('aria-hidden', mobile ? String(!open) : 'false');
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function syncViewToggleLabel() {
+      if (!viewToggle) return;
+      viewToggle.textContent = isMobileMode() ? 'Switch to Desktop View' : 'Switch to Mobile View';
+    }
+
+    function showTab(tabId) {
+      buttons.forEach((button) => {
+        const active = button.dataset.tab === tabId;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-current', active ? 'page' : 'false');
+      });
+
+      panels.forEach((panel) => {
+        panel.classList.toggle('active', panel.id === tabId);
+      });
+
+      if (isMobileMode() && topbar && menuToggle) {
+        topbar.classList.remove('menu-open');
+        syncMenuA11y();
+      }
+    }
+
+    buttons.forEach((button) => {
+      bindTap(button, () => showTab(button.dataset.tab));
+    });
+
+    tabLinks.forEach((link) => {
+      bindTap(link, (event) => {
+        const target = event.currentTarget.getAttribute('data-tab-link');
+        if (!target) return;
+        event.preventDefault();
+        showTab(target);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    faqButtons.forEach((button) => {
+      bindTap(button, () => {
+        const answerId = button.getAttribute('aria-controls');
+        if (!answerId) return;
+        const answer = document.getElementById(answerId);
+        if (!answer) return;
+
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        answer.classList.toggle('open', !expanded);
+      });
+    });
+
+    if (menuToggle && topbar) {
+      bindTap(menuToggle, () => {
+        const open = topbar.classList.toggle('menu-open');
+        menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        syncMenuA11y();
+      });
+    }
+
+    if (viewToggle) {
+      bindTap(viewToggle, (event) => {
+        event.preventDefault();
+        const body = document.body;
+        if (body.classList.contains('force-mobile')) {
+          body.classList.remove('force-mobile');
+          body.classList.add('force-desktop');
+        } else {
+          body.classList.remove('force-desktop');
+          body.classList.add('force-mobile');
+        }
+        if (topbar) topbar.classList.remove('menu-open');
+        syncMenuA11y();
+        syncViewToggleLabel();
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      if (!document.body.classList.contains('force-mobile') && topbar) {
+        topbar.classList.remove('menu-open');
+      }
+      syncMenuA11y();
+      syncViewToggleLabel();
+    });
+
+    syncMenuA11y();
+    syncViewToggleLabel();
+  </script>
+</body>
+</html>
