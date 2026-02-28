@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FixForge Handyman</title>
+  <title>Rock Solid Handyman Services</title>
   <style>
     :root {
-      --navy-950: #071428;
-      --navy-900: #0a1f43;
-      --navy-800: #103164;
-      --navy-700: #1a4a8f;
-      --ink: #12213f;
-      --muted: #4e628f;
-      --bg: #f5f8ff;
+      --navy-950: #07162d;
+      --navy-900: #0b2a57;
+      --navy-800: #113f78;
+      --navy-700: #2b5f96;
+      --ink: #0f2648;
+      --muted: #5a6f8f;
+      --bg: #edf2f8;
       --white: #ffffff;
-      --line: #dbe3f4;
-      --accent: #f05a28;
-      --accent-strong: #de4715;
-      --accent-soft: #fff1eb;
+      --line: #ccd8e9;
+      --accent: #ee6b1f;
+      --accent-strong: #cf5313;
+      --accent-soft: #fff2e8;
       --radius: 16px;
       --shadow-sm: 0 6px 18px rgba(9, 29, 63, 0.09);
       --shadow-md: 0 16px 36px rgba(9, 29, 63, 0.14);
@@ -32,7 +32,7 @@
     body {
       font-family: "Avenir Next", "Segoe UI", Tahoma, sans-serif;
       color: var(--ink);
-      background: radial-gradient(circle at top right, rgba(240, 90, 40, 0.14), transparent 32%), var(--bg);
+      background: radial-gradient(circle at top right, rgba(238, 107, 31, 0.12), transparent 32%), var(--bg);
       min-height: 100vh;
       line-height: 1.5;
     }
@@ -44,12 +44,12 @@
     .topbar {
       background: linear-gradient(135deg, var(--navy-950), var(--navy-800));
       color: var(--white);
-      padding: 0.9rem clamp(1rem, 3vw, 2.5rem) 0.85rem;
+      padding: 1.2rem clamp(1rem, 3vw, 2.5rem) 1.1rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
-      gap: 0.75rem;
+      gap: 1rem;
     }
 
     .brand {
@@ -59,19 +59,24 @@
     }
 
     .logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background: linear-gradient(140deg, var(--accent), #ff7b52);
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 1.05rem;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+      width: 92px;
+      height: 92px;
+      border-radius: 0;
+      background-image: url('/Users/ochatterji/App Development/Handyman/rock_solid.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: none;
+      /* Feather edges so logo background blends into the banner */
+      -webkit-mask-image: radial-gradient(circle at center, #000 72%, transparent 100%);
+      mask-image: radial-gradient(circle at center, #000 72%, transparent 100%);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      flex: 0 0 auto;
     }
 
     .brand h1 {
-      font-size: 1.05rem;
+      font-size: 1.2rem;
       line-height: 1.2;
       letter-spacing: 0.25px;
     }
@@ -108,7 +113,7 @@
     }
 
     .top-contact p {
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       color: #d6e2fb;
       text-align: right;
       line-height: 1.35;
@@ -152,13 +157,28 @@
       font-weight: 700;
     }
 
+    .footer-shield {
+      display: grid;
+      place-items: center;
+      padding: 0.4rem 1rem 0.9rem;
+    }
+
+    .footer-shield img {
+      width: min(320px, 64vw);
+      height: auto;
+      display: block;
+      /* Crop to shield silhouette so the dark square background is removed */
+      clip-path: polygon(50% 3%, 83% 18%, 84% 60%, 72% 86%, 50% 98%, 28% 86%, 16% 60%, 17% 18%);
+      filter: drop-shadow(0 10px 16px rgba(7, 22, 45, 0.22));
+    }
+
     .tabs {
       display: flex;
       gap: 0.55rem;
       flex-wrap: nowrap;
       width: auto;
-      max-width: none;
       margin: 0 0 0 2.25rem;
+      max-width: none;
       flex: 0 1 auto;
     }
 
@@ -167,8 +187,8 @@
       background: rgba(255, 255, 255, 0.08);
       color: var(--white);
       border-radius: 10px;
-      min-height: 42px;
-      padding: 0.55rem 0.95rem;
+      min-height: 46px;
+      padding: 0.62rem 1.05rem;
       font-size: 0.92rem;
       font-weight: 700;
       cursor: pointer;
@@ -711,9 +731,9 @@
   <main class="site">
     <header class="topbar">
       <div class="brand">
-        <div class="logo" aria-hidden="true">FF</div>
+        <div class="logo" aria-hidden="true"></div>
         <div>
-          <h1>FixForge Handyman</h1>
+          <h1>Rock Solid Handyman Services</h1>
           <p>Quality home repair and improvement</p>
         </div>
       </div>
@@ -725,7 +745,7 @@
         <button class="tab-button" type="button" data-tab="faqs">FAQs</button>
       </nav>
       <div class="top-contact">
-        <p>Call: (555) 213-9087</p>
+        <p>608-359-0806</p>
         <button class="contact-cta" type="button" data-tab-link="contact">Contact Us</button>
       </div>
     </header>
@@ -742,7 +762,7 @@
                 and workmanship you can count on.
               </p>
               <div class="hero-ctas">
-                <a class="btn btn-primary" href="mailto:hello@fixforgehandyman.com">Get a Free Estimate</a>
+                <a class="btn btn-primary" href="mailto:hello@rocksolidhandymanservices.com">Get a Free Estimate</a>
                 <a class="btn btn-ghost" href="#contact" data-tab-link="contact">View Contact Info</a>
               </div>
             </div>
@@ -829,7 +849,7 @@
       <article class="tab-panel" id="testimonials">
         <header class="section-head">
           <h2>What Clients Say</h2>
-          <p>Recent feedback from homeowners who hired FixForge for repair and maintenance work.</p>
+          <p>Recent feedback from homeowners who hired Rock Solid Handyman Services for repair and maintenance work.</p>
         </header>
         <section class="testimonials">
           <blockquote class="quote">
@@ -849,7 +869,7 @@
 
       <article class="tab-panel" id="contact">
         <header class="section-head">
-          <h2>Contact FixForge</h2>
+          <h2>Contact Rock Solid Handyman Services</h2>
           <p>Call, email, or send a quote request and we will follow up with the next available scheduling options.</p>
         </header>
 
@@ -858,13 +878,13 @@
             <h3>Request a free estimate</h3>
             <p>Tell us what you need done and attach a few photos for faster pricing.</p>
             <div class="hero-ctas">
-              <a class="btn btn-primary" href="mailto:hello@fixforgehandyman.com">Email Us</a>
+              <a class="btn btn-primary" href="mailto:hello@rocksolidhandymanservices.com">Email Us</a>
               <a class="btn btn-ghost" href="tel:+15552139087">Call Now</a>
             </div>
           </div>
           <ul class="contact-list">
             <li><strong>Phone:</strong> (555) 213-9087</li>
-            <li><strong>Email:</strong> hello@fixforgehandyman.com</li>
+            <li><strong>Email:</strong> hello@rocksolidhandymanservices.com</li>
             <li><strong>Hours:</strong> Mon-Sat, 8:00 AM-6:00 PM</li>
             <li><strong>Service Area:</strong> Greater Metro Area</li>
           </ul>
@@ -928,8 +948,11 @@
 
     <button class="contact-cta contact-cta-mobile" type="button" data-tab-link="contact">Contact Us</button>
 
+    <div class="footer-shield" aria-hidden="true">
+      <img src="/Users/ochatterji/App Development/Handyman/rock_solid.png" alt="" />
+    </div>
     <footer>
-      Copyright 2026 FixForge Handyman. Placeholder branding and sample content.
+      Copyright 2026 Rock Solid Handyman Services. Placeholder branding and sample content.
     </footer>
     <div class="view-toggle-wrap">
       <a href="#" id="view-toggle" class="view-toggle-link">Switch to Mobile View</a>
