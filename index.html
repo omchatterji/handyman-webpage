@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rock Solid Handyman Services</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1" />
   <style>
     :root {
       --navy-950: #07162d;
@@ -375,6 +376,45 @@
       gap: 0.85rem;
     }
 
+    .services-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .services-subhead {
+      color: var(--navy-900);
+      font-size: 1.12rem;
+      margin: 0 0 0.7rem;
+      letter-spacing: 0.2px;
+    }
+
+    .services-special {
+      border: 2px solid rgba(238, 107, 31, 0.35);
+      background: linear-gradient(135deg, #fff6ef, #fff1e6);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      margin: 0.2rem 0 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .services-special .special-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      padding: 0.22rem 0.5rem;
+      border-radius: 999px;
+      margin-bottom: 0.38rem;
+    }
+
+    .services-special p {
+      margin: 0;
+      color: #5b3a2a;
+      font-weight: 700;
+    }
+
     .service {
       border: 1px solid var(--line);
       background: var(--white);
@@ -399,6 +439,27 @@
       color: var(--navy-800);
       margin-bottom: 0.35rem;
       font-size: 1rem;
+    }
+
+    .service-title {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0;
+    }
+
+    .service-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      display: grid;
+      place-items: center;
+      line-height: 1;
+      font-size: 19px;
+      flex: 0 0 auto;
+      font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
     }
 
     .service p {
@@ -516,6 +577,50 @@
       display: block;
     }
 
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 1rem;
+      align-items: stretch;
+      margin-top: 0.7rem;
+    }
+
+    .about-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      background: #dbe4f4;
+      display: block;
+    }
+
+    .about-card {
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+      padding: 1.1rem;
+      display: grid;
+      align-content: center;
+      gap: 0.8rem;
+    }
+
+    .about-kicker {
+      color: var(--accent-strong);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
     footer {
       text-align: center;
       color: #60719a;
@@ -525,6 +630,10 @@
 
     @media (max-width: 920px) {
       .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .about-layout {
         grid-template-columns: 1fr;
       }
 
@@ -750,6 +859,7 @@
       <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
       <nav class="tabs" aria-label="Main Navigation">
         <button class="tab-button active" type="button" data-tab="home">Home</button>
+        <button class="tab-button" type="button" data-tab="about">About Us</button>
         <button class="tab-button" type="button" data-tab="services">Services</button>
         <button class="tab-button" type="button" data-tab="testimonials">Testimonials</button>
         <button class="tab-button" type="button" data-tab="faqs">FAQs</button>
@@ -799,7 +909,32 @@
           </article>
           <article class="strip-card">
             <h3>Local and dependable</h3>
-            <p>Proudly serving neighborhoods across the metro area.</p>
+            <p>Proudly serving Janesville and surrounding areas.</p>
+          </article>
+        </section>
+      </article>
+
+      <article class="tab-panel" id="about">
+        <header class="section-head">
+          <h2>About Us</h2>
+        </header>
+        <section class="about-layout">
+          <img
+            class="about-photo"
+            src="./about_us.png"
+            alt="Stock family photo placeholder"
+          />
+          <article class="about-card">
+            <p class="about-kicker">Michael Comstock</p>
+            <p>
+              Michael is a proud Janesville resident and Navy veteran who served four years in Japan, with a background in construction and industrial maintenance.
+            </p>
+            <p>
+              As a husband and father of two boys, his goal is to serve our community by helping homeowners improve and maintain their homes — one house at a time.
+            </p>
+            <p>
+              He takes pride in working with his hands and delivering quality repairs you can count on.
+            </p>
           </article>
         </section>
       </article>
@@ -808,51 +943,47 @@
         <header class="section-head">
           <h2>Handyman Services</h2>
           <p>
-            Practical help for maintenance, repairs, and installation jobs. We can customize service plans
-            for homeowners, landlords, and small offices.
+            Service categories for interior upgrades and outdoor seasonal work.
           </p>
         </header>
-        <section class="services-grid">
-          <article class="service">
-            <div class="icon" aria-hidden="true">W</div>
-            <h3>General Repairs</h3>
-            <p>Drywall patches, door adjustments, trim fixes, and everyday home issues.</p>
-          </article>
-          <article class="service">
-            <div class="icon" aria-hidden="true">L</div>
-            <h3>Light Installation</h3>
-            <p>Fans, fixtures, dimmers, and replacements to refresh interior spaces.</p>
-          </article>
-          <article class="service">
-            <div class="icon" aria-hidden="true">K</div>
-            <h3>Kitchen and Bath</h3>
-            <p>Faucets, cabinet hardware, caulking, and fixture swap-outs.</p>
-          </article>
-          <article class="service">
-            <div class="icon" aria-hidden="true">O</div>
-            <h3>Outdoor Work</h3>
-            <p>Fence touch-ups, gate alignment, weatherproofing, and seasonal upkeep.</p>
-          </article>
-          <article class="service">
-            <div class="icon" aria-hidden="true">A</div>
-            <h3>Assembly and Mounting</h3>
-            <p>Furniture assembly, shelving, TV mounts, and wall hardware installs.</p>
-          </article>
-          <article class="service">
-            <div class="icon" aria-hidden="true">P</div>
-            <h3>Punch-List Projects</h3>
-            <p>Bundle multiple small jobs into one efficient service visit.</p>
-          </article>
-          <article class="service">
-            <div class="icon" aria-hidden="true">R</div>
-            <h3>Rental Turnovers</h3>
-            <p>Quick unit refreshes between tenants with detail-focused repair work.</p>
-          </article>
-          <article class="service">
-            <div class="icon" aria-hidden="true">M</div>
-            <h3>Maintenance Plans</h3>
-            <p>Recurring preventative upkeep for busy homeowners and property managers.</p>
-          </article>
+        <section class="services-special" aria-label="Current Special">
+          <span class="special-tag">Special</span>
+          <p>Honey-do List Special: bundle multiple small jobs - 3 hours for $199.</p>
+        </section>
+        <section class="services-group" aria-label="Changing and Upgrading Services">
+          <h3 class="services-subhead">Changing/Upgrading</h3>
+          <div class="services-grid">
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">plumbing</span>Faucets</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">countertops</span>Vanity Tops</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">wc</span>Toilets</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">mode_fan</span>Fans</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">bathroom</span>Sinks</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">lightbulb</span>Light Fixtures</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">door_front</span>Hardware Doorknobs</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">lock</span>Locks</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">toggle_on</span>Light Switches</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">floor</span>Flooring</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">door_front</span>Doors</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">oven</span>Appliance Installation</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">handyman</span>Trim</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">outlet</span>Adding or Replacing Outlets</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">format_paint</span>Interior Painting</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">tv</span>Mounting TVs</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">view_quilt</span>Adding Backsplash</h3></article>
+          </div>
+        </section>
+        <section class="services-group" aria-label="Outdoor Services">
+          <h3 class="services-subhead">Outdoor</h3>
+          <div class="services-grid">
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">eco</span>Leaf Cleanup</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">cleaning_services</span>Gutter Cleaning and Washing</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">content_cut</span>Tree and Shrub Pruning</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">grass</span>Small Landscaping Projects</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">yard</span>Spring Cleanup</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">weather_snowy</span>Snow Removal</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">format_paint</span>Exterior Painting</h3></article>
+            <article class="service"><h3 class="service-title"><span class="service-icon material-symbols-outlined" aria-hidden="true">emoji_objects</span>Holiday Light Installation</h3></article>
+          </div>
         </section>
       </article>
 
@@ -962,7 +1093,7 @@
       <img src="./rock_solid.png" alt="" />
     </div>
     <footer>
-      Copyright 2026 Rock Solid Handyman Services. Placeholder branding and sample content.
+      Copyright 2026 Rock Solid Handyman Services.
     </footer>
     <div class="view-toggle-wrap">
       <a href="#" id="view-toggle" class="view-toggle-link">Switch to Mobile View</a>
